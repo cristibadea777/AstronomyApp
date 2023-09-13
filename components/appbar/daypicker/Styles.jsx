@@ -6,15 +6,13 @@ const generareStiluriDayPicker = () => {
     {
         containerDatePicker: {
             flex: 1,
-            borderWidth: 7, 
-            borderColor: "white",
+            backgroundColor: "#232B2B"
         },
 
         butonPicker: {
             flex: 1, 
             alignItems: "center", 
             justifyContent: "center",
-            backgroundColor: "black"
         },
     }
   )

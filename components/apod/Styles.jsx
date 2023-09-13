@@ -7,8 +7,6 @@ const generareStiluriAPOD = () => {
         containerPrincipal: {
             flex: 1,
             width: "100%",
-            borderWidth: 7, 
-            borderColor: "cyan",
             backgroundColor: '#1e1e1e'
         },
         
@@ -23,20 +21,16 @@ const generareStiluriAPOD = () => {
             fontSize: 17,
             color: "white",
             padding: 12,
-            paddingTop: 7
+            paddingTop: 7,
         },
 
         containerPoza: {
-            height: "60%",
-            borderWidth: 7, 
-            borderColor: "yellow"
+            height: "40%",
         },
 
         containerText: {
             flex: 1,
             height: "20%",
-            borderWidth: 7, 
-            borderColor: "blue"
         },
 
         containerTitlu: {

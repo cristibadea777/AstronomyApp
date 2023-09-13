@@ -1,17 +1,21 @@
 import { TouchableOpacity, View } from "react-native"
 import { generareStiluriAppBar } from "./Styles"
-import DayPicker from "../apod/daypicker/DayPicker"
-import { generareStiluriDayPicker } from "../apod/daypicker/Styles"
+import DayPicker from "./daypicker/DayPicker"
+import { generareStiluriDayPicker } from "./daypicker/Styles"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 
-const AppBar = () => {
+const AppBar = ({dataAleasa, setDataAleasa}) => {
 
     const styles            = generareStiluriAppBar()
     const stylesDayPicker   = generareStiluriDayPicker()
 
     const [favorita,    setFavorita]    = useState(false)
+
+    const handlePressButonFavorita = async () => {
+        setFavorita(!favorita)
+    }
     
     return(
         <View style={styles.containerPrincipal}>
@@ -21,11 +25,15 @@ const AppBar = () => {
                 </TouchableOpacity>
             </View>
 
-            <DayPicker styles={stylesDayPicker}/>
+            <DayPicker 
+                styles          =   {stylesDayPicker}
+                dataAleasa      =   {dataAleasa}
+                setDataAleasa   =   {setDataAleasa}
+            />
 
             <View style={styles.containerFavorite}>
                     <TouchableOpacity 
-                        onPress={() => setFavorita(!favorita)}
+                        onPress={handlePressButonFavorita}
                     >
                         <FontAwesomeIcon icon={faHeart} color={favorita ? "red" : "white"} size={33}/>
                     </TouchableOpacity>

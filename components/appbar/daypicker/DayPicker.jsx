@@ -1,19 +1,20 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Text, TouchableOpacity, View } from "react-native";
 import { useState } from 'react';
+import { formatDate } from '../../apod/ApelareAPI';
 
-const DayPicker = ({styles}) => {
+const DayPicker = ({styles, dataAleasa, setDataAleasa}) => {
 
-    const [date,    setDate]    = useState(new Date())
     const [picker,  setPicker]  = useState(false)
-  
+    
     const onChangeDatePicker = (evt, selectedDate) =>{
       console.log(selectedDate)
+      setDataAleasa(selectedDate)
       setPicker(false)
     } 
 
     const dataMinim = new Date("1995-06-20") //prima poza APOD 
-    const dataAzi   = new Date()             //data de azi
+    const dataAzi   = new Date() //maxim data de azi 
 
     return (
         <View style={styles.containerDatePicker}>
@@ -21,12 +22,12 @@ const DayPicker = ({styles}) => {
                 style={styles.butonPicker}
                 onPress={() => {setPicker(true)}}
             >
-                <Text style={{color: "white", fontSize: 24}}> {dataAzi.toDateString()} </Text>
+                <Text style={{color: "white", fontSize: 24}}> {formatDate(dataAleasa)} </Text>
             </TouchableOpacity>
 
             {picker && (          
                 <DateTimePicker 
-                    value={date}
+                    value={dataAleasa}
                     mode={"date"}
                     onChange={onChangeDatePicker}
                     maximumDate={dataAzi}

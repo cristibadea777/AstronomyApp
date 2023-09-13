@@ -7,28 +7,21 @@ const generareStiluriAppBar = () => {
         containerPrincipal: {
             width: "100%", 
             height: "10%", 
-            backgroundColor: "#1e1e1e",
-            borderWidth: 7, 
-            borderColor: "green",
             flexDirection: "row"
         },
 
         containerMeniu: {
             width: "17%", 
-            backgroundColor: "black",
+            backgroundColor: "#232B2B",
             alignItems: "center",
             justifyContent: "center",
-            borderWidth: 7, 
-            borderColor: "white",
         },
 
         containerFavorite: {
             width: "20%",
-            backgroundColor: "black",
+            backgroundColor: "#232B2B",
             alignItems: "center",
             justifyContent: "center",
-            borderWidth: 7, 
-            borderColor: "white",
         },
 
     }
