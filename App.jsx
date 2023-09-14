@@ -17,13 +17,9 @@ export default function App() {
   //to do
   //unele nu au poze, au linkuri de ytb - exemplu 6 septembrie - de pus video in container (daca url incepe cu https://youtube...)
   //galerie 
-  //cand data se schimba, daca DATA nu exista in DB, atunci inima sa fie colorata alb, altfel rosu (ca e favorita)
-  //in galerie cand se selcteaza un apod (apodu sa fie pus intr-un modal) pt vizualizare, data sa fie blocata (sa fie doar de afisaj nu sa se pota selecta alta), si in loc de barele de meniu sa apara o sageata inapoi - buton favorita sa fie si el vizibil - se da si listaFavorite ca arg
-  //functionalitate favorite - cand se incarca app, se face si o lista cu favoritele (lista de dăți), ca sa nu seacceseze baza de date la fiecare 
-    //apod deschis, ci sa se vrifice daca exista in lista - atunci inima se face rosie - altfel se face alba (se verifica cand se schimba DATA)
-    //cand se apasa pe inima
-      //DATA nu exista in lista - atuni se introduce si in lista, si in bd 
-      //DATA exista in lista - se scoate si din lista si din bd
+  //in galerie cand se selcteaza un apod (apodu sa fie pus intr-un modal) pt vizualizare, data sa fie blocata 
+    //(sa fie doar de afisaj nu sa se pota selecta alta), si in loc de barele de meniu sa apara o sageata inapoi 
+    //- buton favorita sa fie si el vizibil - se da si listaFavorite ca arg
 
   const [visibilityAPOD,      setVisibilityAPOD]      = useState(true)
   const [visibilityFavorite, setVisibilityFavorite] = useState(false)

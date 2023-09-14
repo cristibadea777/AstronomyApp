@@ -59,14 +59,14 @@ const addAPODtoFavorites = ({titlu, explicatie, dataAleasa, url}) => {
     )
 }
 
-const deleteAPODfromFavorites = (data) => {
+const deleteAPODfromFavorites = ({dataAleasa}) => {
     db.transaction(
         tx => {
             tx.executeSql(
                 'DELETE FROM FavoriteAPODS WHERE data = ?',
-                [data],
-                ()    => console.log("APOD of date " + data + " removed from favorites"),
-                error => console.log("Error removing APOD of date " + data + " from favorites:\n" + JSON.stringify(error))
+                [formatDate(dataAleasa)],
+                ()    => console.log("APOD of date " + formatDate(dataAleasa) + " removed from favorites"),
+                error => console.log("Error removing APOD of date " + formatDate(dataAleasa) + " from favorites:\n" + JSON.stringify(error))
             )
         }
     )
@@ -77,7 +77,7 @@ const dropDatabaseAsync = async () => {
     const databaseFile = `${FileSystem.documentDirectory}SQLite/FavoriteAPODS.db`
     try{
         await FileSystem.deleteAsync(databaseFile) //asteptam ca FileSystem sa termine de sters baza de date
-        console.log("Delted database")
+        console.log("Deleted database")
     } 
     catch(error){
         console.log("Error deleting database:\n" + JSON.stringify(error))

@@ -20,7 +20,7 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
         if(favorita){
             setFavorita(false)
             setListaFavorite(removeElementListaFavorite(listaFavorite, dataAleasa))
-            deleteAPODfromFavorites(dataAleasa)
+            await deleteAPODfromFavorites({dataAleasa})
         }else{
             setFavorita(true)
             setListaFavorite(addElementListaFavorite(listaFavorite, titlu, explicatie, url, dataAleasa))
@@ -73,9 +73,9 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
             </>
             )}
 
-            {visibilityFavorite &&(
+            {(visibilityFavorite || visibilityModalImagine) &&(
             <View style={styles.containerSecundare}>
-                <Text style={styles.titluSecundare}>Favorites</Text>
+                <Text style={styles.titluSecundare}>{visibilityFavorite ? 'Favorites' : 'Image'}</Text>
             </View>
             )}
         </View>
