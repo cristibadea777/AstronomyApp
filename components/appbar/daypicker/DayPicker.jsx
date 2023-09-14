@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { useState } from 'react';
 import { formatDate } from '../../apod/ApelareAPI';
 
-const DayPicker = ({styles, dataAleasa, setDataAleasa}) => {
+const DayPicker = ({styles, dataAleasa, setDataAleasa, visibilityModalImagine}) => {
 
     const [picker,  setPicker]  = useState(false)
     
@@ -19,10 +19,11 @@ const DayPicker = ({styles, dataAleasa, setDataAleasa}) => {
     return (
         <View style={styles.containerDatePicker}>
             <TouchableOpacity
-                style={styles.butonPicker}
-                onPress={() => {setPicker(true)}}
+                style    = {styles.butonPicker}
+                onPress  = {() => {setPicker(true)}}
+                disabled = {visibilityModalImagine}
             >
-                <Text style={{color: "white", fontSize: 24}}> {formatDate(dataAleasa)} </Text>
+                <Text style={styles.textData}> {formatDate(dataAleasa)} </Text>
             </TouchableOpacity>
 
             {picker && (          

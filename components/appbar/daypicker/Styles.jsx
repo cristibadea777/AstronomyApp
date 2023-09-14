@@ -14,6 +14,11 @@ const generareStiluriDayPicker = () => {
             alignItems: "center", 
             justifyContent: "center",
         },
+
+        textData: {
+          color: "white", 
+          fontSize: 24
+        }
     }
   )
 
