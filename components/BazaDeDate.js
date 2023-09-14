@@ -20,7 +20,7 @@ const creareTabele = () => {
     )
 }
 
-getFavoriteAPODS = () => {
+const getFavoriteAPODS = () => {
     return new Promise((resolve, reject) => {
         db.transaction(
             tx => {
@@ -91,6 +91,7 @@ const inchidereBd = () => {
 
 export{
     creareTabele,
+    getFavoriteAPODS,
     addAPODtoFavorites,
     deleteAPODfromFavorites,
     dropDatabaseAsync,

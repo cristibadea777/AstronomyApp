@@ -24,6 +24,19 @@ const generareStiluriAppBar = () => {
             justifyContent: "center",
         },
 
+        containerSecundare: {
+          flex: 1, 
+          backgroundColor: "#232B2B",
+          justifyContent: "center",
+          alignItems: "center",
+        },
+
+        titluSecundare: {
+            color: "white", 
+            fontSize: 24
+        }
+
+
     }
   )
 

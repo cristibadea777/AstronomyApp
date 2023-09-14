@@ -6,7 +6,9 @@ import cheieApi from './components/apod/CheieAPI';
 import { apeleazaApi, formatDate } from './components/apod/ApelareAPI';
 import { ModalImagine } from './components/modal-imagine/ModalImagine';
 import ModalMeniu from './components/modal-meniu/ModalMeniu';
-import { creareTabele, dropDatabaseAsync } from './components/BazaDeDate';
+import { creareTabele, dropDatabaseAsync, getFavoriteAPODS } from './components/BazaDeDate';
+import FavoriteAPODS from './components/favorite/FavoriteAPODS';
+import { findIndexFavorita } from './components/favorite/Favorite';
 
 export default function App() {
 
@@ -14,36 +16,43 @@ export default function App() {
 
   //to do
   //unele nu au poze, au linkuri de ytb - exemplu 6 septembrie - de pus video in container (daca url incepe cu https://youtube...)
-  //modal meniu - gallery, about
   //galerie 
-  //creare folder galerie daca nu exista
-  //creare baza de date in folder daca nu exista
-  //creare tabel apod daca nu exista - data, url imagine, explicatie, titlu
-  //creare functionalitate salvare/stergere in baza de date favorite/nefavorite   
   //cand data se schimba, daca DATA nu exista in DB, atunci inima sa fie colorata alb, altfel rosu (ca e favorita)
-  //in galerie cand se selcteaza un apod pt vizualizare, data sa fie blocata (sa fie doar de afisaj nu sa se pota selecta alta), in loc debarele de meniu sa apara o sageata inapoi
+  //in galerie cand se selcteaza un apod (apodu sa fie pus intr-un modal) pt vizualizare, data sa fie blocata (sa fie doar de afisaj nu sa se pota selecta alta), si in loc de barele de meniu sa apara o sageata inapoi - buton favorita sa fie si el vizibil - se da si listaFavorite ca arg
   //functionalitate favorite - cand se incarca app, se face si o lista cu favoritele (lista de dăți), ca sa nu seacceseze baza de date la fiecare 
     //apod deschis, ci sa se vrifice daca exista in lista - atunci inima se face rosie - altfel se face alba (se verifica cand se schimba DATA)
     //cand se apasa pe inima
       //DATA nu exista in lista - atuni se introduce si in lista, si in bd 
       //DATA exista in lista - se scoate si din lista si din bd
 
-  const [visibilityAPOD,  setVisibilityAPOD]  = useState(true)
+  const [visibilityAPOD,      setVisibilityAPOD]      = useState(true)
+  const [visibilityFavorite, setVisibilityFavorite] = useState(false)
+
   const [dataAleasa,      setDataAleasa]      = useState(new Date())
-  const [imagine,         setImagine]         = useState('')
+  const [url,             setURL]             = useState('')
   const [explicatie,      setExplicatie]      = useState('')
   const [titlu,           setTitlu]           = useState('')
   
   const [visibilityModalImagine,  setVisibilityModalImagine]  = useState(false)
   const [visibilityModalMeniu,    setVisibilityModalMeniu]    = useState(false)
+
+  const [listaFavorite, setListaFavorite] = useState([])
+
+  const [favorita, setFavorita] = useState(false)
+
   const apiKey = cheieApi
+
+  const populareListaFavorite = () => {
+    getFavoriteAPODS()
+    .then( lista => { setListaFavorite(lista) } )
+    .catch(error => { console.log("Error geting favorites list" + JSON.stringify(error)) } )
+  }
 
   useEffect(
     () => {
-      //drop database
       //dropDatabaseAsync()
-      //creare bd si tabele daca nu exista (aplicatia se acceseaza pt prima oara)     
       creareTabele()
+      populareListaFavorite()
     }, []
   )
 
@@ -51,8 +60,7 @@ export default function App() {
     try {
       apeleazaApi(formatDate(dataAleasa)).then(
         raspunsAPI => {
-          console.log(JSON.stringify(raspunsAPI, null, 2))
-          setImagine    (raspunsAPI.url)
+          setURL        (raspunsAPI.url)
           setTitlu      (raspunsAPI.title)
           setExplicatie (raspunsAPI.explanation)
         }
@@ -65,8 +73,15 @@ export default function App() {
   }
 
   useEffect(
-    () => {
-      //preiaDateAPOD()
+    () => { 
+      //setare favorita
+      if(findIndexFavorita(listaFavorite, dataAleasa) === -1)
+        setFavorita(false)
+      else
+        setFavorita(true)
+      //la startup dataAleasa se alege automat (data de azi)
+      //aici se seteaza titlu, explicatie, url
+      preiaDateAPOD()
     }, [dataAleasa]
   )
 
@@ -76,19 +91,31 @@ export default function App() {
       <StatusBar style="auto" backgroundColor={"black"} barStyle={"light-content"}> </StatusBar>
 
       <AppBar 
-        setVisibilityAPOD           = {setVisibilityAPOD}
         apiKey                      = {apiKey}
-        dataAleasa                  = {dataAleasa}    
+        dataAleasa                  = {dataAleasa}
+        url                         = {url}
+        explicatie                  = {explicatie}
+        titlu                       = {titlu}    
         setDataAleasa               = {setDataAleasa}
         setVisibilityModalMeniu     = {setVisibilityModalMeniu}
+        visibilityAPOD              = {visibilityAPOD}
+        visibilityFavorite          = {visibilityFavorite}
+        listaFavorite               = {listaFavorite}
+        setListaFavorite            = {setListaFavorite}
+        favorita                    = {favorita}
+        setFavorita                 = {setFavorita}
       />
       
       {visibilityAPOD && (
       <APOD 
-          imagine                   = {imagine}
+          url                       = {url}
           explicatie                = {explicatie}
           titlu                     = {titlu}
           setVisibilityModalImagine = {setVisibilityModalImagine}
+      />)}
+
+      {visibilityFavorite && (
+      <FavoriteAPODS 
       />)}
 
       {visibilityModalImagine && (
@@ -96,13 +123,15 @@ export default function App() {
         visibilityModalImagine      = {visibilityModalImagine}
         setVisibilityModalImagine   = {setVisibilityModalImagine}
         dataAleasa                  = {dataAleasa}
-        imagine                     = {imagine}
+        url                         = {url}
       />)}
 
       {visibilityModalMeniu && (
       <ModalMeniu
         visibilityModalMeniu    = {visibilityModalMeniu}
         setVisibilityModalMeniu = {setVisibilityModalMeniu}
+        setVisibilityAPOD       = {setVisibilityAPOD}
+        setVisibilityFavorite   = {setVisibilityFavorite}
       />
       )}
 

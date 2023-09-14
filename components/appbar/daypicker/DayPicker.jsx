@@ -8,7 +8,6 @@ const DayPicker = ({styles, dataAleasa, setDataAleasa, visibilityModalImagine}) 
     const [picker,  setPicker]  = useState(false)
     
     const onChangeDatePicker = (evt, selectedDate) =>{
-      console.log(selectedDate)
       setDataAleasa(selectedDate)
       setPicker(false)
     } 

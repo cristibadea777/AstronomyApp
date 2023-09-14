@@ -2,7 +2,7 @@ import { Image, Modal, View } from "react-native"
 import { generareStiluriModalImagine } from "./Styles";
 import AppBar from "../appbar/AppBar";
 
-const ModalImagine = ( {visibilityModalImagine, setVisibilityModalImagine, dataAleasa, imagine} ) => {
+const ModalImagine = ( {visibilityModalImagine, setVisibilityModalImagine, dataAleasa, url} ) => {
     
     const handleCloseModalImagine = () => {
         setVisibilityModalImagine(false)
@@ -21,9 +21,9 @@ const ModalImagine = ( {visibilityModalImagine, setVisibilityModalImagine, dataA
                 setVisibilityModalImagine = {setVisibilityModalImagine}
             />
             
-            {imagine && (
+            {url && (
             <View style={styles.containerModalImagine}>            
-                <Image source={{ uri: imagine }} style={{ flex: 1 }} resizeMode='contain'/>
+                <Image source={{ uri: url }} style={{ flex: 1 }} resizeMode='contain'/>
             </View>)}
 
 
