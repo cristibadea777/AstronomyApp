@@ -42,7 +42,7 @@ export default function App() {
 
   const apiKey = cheieApi
 
-  const populareListaFavorite = () => {
+  const populareListaFavorite = async () => {
     getFavoriteAPODS()
     .then( lista => { setListaFavorite(lista) } )
     .catch(error => { console.log("Error geting favorites list" + JSON.stringify(error)) } )

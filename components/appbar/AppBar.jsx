@@ -4,8 +4,8 @@ import DayPicker from "./daypicker/DayPicker"
 import { generareStiluriDayPicker } from "./daypicker/Styles"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faArrowLeft, faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
-import { addElementListaFavorite, findIndexFavorita, removeElementListaFavorite } from "../favorite/Favorite"
-import { useEffect, useState } from "react"
+import { addElementListaFavorite, removeElementListaFavorite } from "../favorite/Favorite"
+import { addAPODtoFavorites, deleteAPODfromFavorites } from "../BazaDeDate"
 
 const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
                     visibilityModalImagine, setVisibilityModalImagine, 
@@ -20,12 +20,11 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
         if(favorita){
             setFavorita(false)
             setListaFavorite(removeElementListaFavorite(listaFavorite, dataAleasa))
-            //scoatere din bd
+            deleteAPODfromFavorites(dataAleasa)
         }else{
             setFavorita(true)
-            console.log("favorita data " + dataAleasa)
             setListaFavorite(addElementListaFavorite(listaFavorite, titlu, explicatie, url, dataAleasa))
-            //punere in bd
+            await addAPODtoFavorites({titlu, explicatie, dataAleasa, url})
         }
     }
     

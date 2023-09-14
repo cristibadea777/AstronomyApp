@@ -1,3 +1,5 @@
+import { formatDate } from "../apod/ApelareAPI"
+
 const addElementListaFavorite = (listaFavorite, titlu, explicatie, url, data) => {
     const newListaFavorite = [...listaFavorite]
     newListaFavorite.push(
@@ -18,10 +20,10 @@ const removeElementListaFavorite = (listaFavorite, dataAleasa) => {
 }
 
 const findIndexFavorita = (listaFavorite, dataAleasa) => {
-    const newDataAleasa = new Date(dataAleasa)
+    const newDataAleasa = formatDate(dataAleasa)
     const index = listaFavorite.findIndex(item => {
-        const itemDate = new Date(item.data);
-        return itemDate.getTime() === newDataAleasa.getTime();
+        const itemDate = formatDate(item.data)
+        return itemDate === newDataAleasa
     })
     return index !== -1 ? index : -1
 }

@@ -1,5 +1,6 @@
 import * as SQLite from 'expo-sqlite'
 import * as FileSystem from 'expo-file-system'
+import { formatDate } from './apod/ApelareAPI'
 
 //Baza de Date
 //deschide baza de date / sau o creeaza daca nu exista 
@@ -20,7 +21,7 @@ const creareTabele = () => {
     )
 }
 
-const getFavoriteAPODS = () => {
+const getFavoriteAPODS = async () => {
     return new Promise((resolve, reject) => {
         db.transaction(
             tx => {
@@ -39,18 +40,20 @@ const getFavoriteAPODS = () => {
     )
 }
 
-const addAPODtoFavorites = (titlu, explicatie, data, url) => {
-    let id = ''
+
+const addAPODtoFavorites = ({titlu, explicatie, dataAleasa, url}) => {
     db.transaction(
         tx => {
             tx.executeSql(
                 'INSERT INTO FavoriteAPODS (titlu, explicatie, data, url) VALUES (?, ?, ?, ?)',
-                [titlu, explicatie, data],
+                [titlu, explicatie, formatDate(dataAleasa), url],
                 (txObj, resultSet) => {
-                    id = resultSet.insertId
-                    console.log('INSERTED APOD - ID: ' + id)   
+                    const id = resultSet.insertId
+                    console.log('INSERTED APOD - ID: ' + id)
                 },
-                error => console.log('Error inserting APOD:\n' + JSON.stringify(error))
+                error => {
+                    console.log('Error inserting APOD:\n' + JSON.stringify(error))
+                }
             )
         }
     )
