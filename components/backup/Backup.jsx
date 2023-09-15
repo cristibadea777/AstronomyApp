@@ -40,17 +40,17 @@ const Backup = ({preiaDateAPOD, populareListaFavorite}) => {
     return(
         <View style={styles.containerBackup}>
 
-            <View style={{width: "100%", height: "25%", alignItems: "center",  justifyContent: "space-around", flexDirection: "row"}}>
-                <Text style={[styles.textModalBackup, {borderBottomWidth: 1, borderBottomColor: "white"}]}>Backup your data</Text>
+            <View style={styles.containerElement}>
+                <Text style={styles.textElementTitlu}>Backup your data</Text>
             </View>
-            <View style={{width: "100%", height: "25%", alignItems: "center",  justifyContent: "space-around", flexDirection: "row"}}>
-                <Text style={styles.textModalBackup}>Export favorites database</Text>
+            <View style={styles.containerElement}>
+                <Text style={styles.textContainerElement}>Export favorites database</Text>
                 <TouchableOpacity onPress={handlePressExportData}>
                     <FontAwesomeIcon icon={faFileExport} size={57} color="white"/>
                 </TouchableOpacity>
             </View> 
-            <View style={{width: "100%", height: "25%", alignItems: "center",  justifyContent: "space-around", flexDirection: "row"}}>
-                <Text style={styles.textModalBackup}>Import favorites database</Text>
+            <View style={styles.containerElement}>
+                <Text style={styles.textContainerElement}>Import favorites database</Text>
                 <TouchableOpacity onPress={handlePressImportData}>
                     <FontAwesomeIcon icon={faFileImport} size={57} color="white"/>
                 </TouchableOpacity>
