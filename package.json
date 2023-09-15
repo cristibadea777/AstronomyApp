@@ -23,7 +23,8 @@
     "react-native-svg": "^13.13.0",
     "expo-sharing": "~11.5.0",
     "expo-sqlite": "~11.3.3",
-    "expo-file-system": "~15.4.4"
+    "expo-file-system": "~15.4.4",
+    "expo-document-picker": "~11.5.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

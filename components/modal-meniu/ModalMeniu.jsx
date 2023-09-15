@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faBars, faFileArchive, faHeart, faInfo, faPhotoFilm } from "@fortawesome/free-solid-svg-icons"
 
 const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibilityAPOD, setVisibilityFavorite, 
-                      tempTitlu, tempExplicatie, tempUrl, setTitlu, setExplicatie, setURL}) => {
+                      tempTitlu, tempExplicatie, tempUrl, setTitlu, setExplicatie, setURL, setVisibilityAbout, setVisibilityBackup}) => {
 
     const handleCloseModalMeniu = () => {
         setVisibilityModalMeniu(false)
@@ -19,22 +19,33 @@ const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibili
         setVisibilityAPOD(true)
         //inchide restu
         setVisibilityFavorite(false)
+        setVisibilityAbout(false)
+        setVisibilityBackup(false)
         handleCloseModalMeniu()
     }
     const handleOnPressFavorite = () => {
         setVisibilityFavorite(true)
         //inchide restu
         setVisibilityAPOD(false)
+        setVisibilityAbout(false)
+        setVisibilityBackup(false)
         handleCloseModalMeniu()
     }
     const handleOnPressBackup = () => {
         //deschide backup
+        setVisibilityBackup(true)
         //inchide restu
+        setVisibilityAbout(false)
+        setVisibilityAPOD(false)
+        setVisibilityFavorite(false)
         handleCloseModalMeniu()
     }
     const handleOnPressAbout = () => {
         //deschide about
+        setVisibilityAbout(true)
         //inchide restu
+        setVisibilityAPOD(false)
+        setVisibilityFavorite(false)
         handleCloseModalMeniu()
     }
 

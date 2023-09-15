@@ -9,19 +9,20 @@ import ModalMeniu from './components/modal-meniu/ModalMeniu';
 import { creareTabele, dropDatabaseAsync, getFavoriteAPODS } from './components/BazaDeDate';
 import FavoriteAPODS from './components/favorite/FavoriteAPODS';
 import { findIndexFavorita } from './components/favorite/Favorite';
+import About from './components/about/About';
+import Backup from './components/backup/Backup';
 
 export default function App() {
 
   //#232B2B #1e1e1e #11574a
   
   //to do
-  //unele nu au poze, au linkuri de ytb - exemplu 6 septembrie - de pus video in container (daca url incepe cu https://youtube...)
-  //in galerie cand se selcteaza un apod (apodu sa fie pus intr-un modal) pt vizualizare, data sa fie blocata 
-    //(sa fie doar de afisaj nu sa se pota selecta alta), si in loc de barele de meniu sa apara o sageata inapoi 
-    //- buton favorita sa fie si el vizibil - se da si listaFavorite ca arg
+  //unele nu au poze, au linkuri de ytb - exemplu 6 septembrie - de pus video in container (daca raspuns din API  media_type = video)
 
   const [visibilityAPOD,          setVisibilityAPOD]          = useState(true)
   const [visibilityFavorite,      setVisibilityFavorite]      = useState(false)
+  const [visibilityAbout,         setVisibilityAbout]         = useState(false) 
+  const [visibilityBackup,        setVisibilityBackup]        = useState(false)
   const [dataAleasa,              setDataAleasa]              = useState(new Date())
   const [url,                     setURL]                     = useState('')
   const [explicatie,              setExplicatie]              = useState('')
@@ -108,6 +109,8 @@ export default function App() {
         setVisibilityAPOD           = {setVisibilityAPOD}
         setVisibilityFavorite       = {setVisibilityFavorite}
         dataAPOD                    = {dataAPOD}
+        visibilityAbout             = {visibilityAbout}
+        visibilityBackup            = {visibilityBackup}
       />
       
       {visibilityAPOD && (
@@ -151,13 +154,25 @@ export default function App() {
         setTitlu                = {setTitlu}
         setExplicatie           = {setExplicatie}
         setURL                  = {setURL}
+        setVisibilityAbout      = {setVisibilityAbout}
+        setVisibilityBackup     = {setVisibilityBackup}
       />
+      )}
+
+      {visibilityAbout && (
+        <About />
+      )}
+
+      {visibilityBackup && (
+        <Backup 
+          preiaDateAPOD          = {preiaDateAPOD}
+          populareListaFavorite  = {populareListaFavorite}
+        />
       )}
 
     </View> 
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -12,7 +12,7 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
                     setVisibilityModalMeniu, visibilityAPOD, visibilityFavorite, 
                     listaFavorite, setListaFavorite, favorita, setFavorita,
                     vizualizareFavorit, setVizualizareFavorit, setVisibilityFavorite, 
-                    setVisibilityAPOD, dataAPOD,
+                    setVisibilityAPOD, dataAPOD, visibilityAbout, visibilityBackup
                 }) => {
 
     const styles            = generareStiluriAppBar()
@@ -88,9 +88,15 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
             </>
             )}
 
-            {(visibilityFavorite || visibilityModalImagine) &&(
+            {(visibilityFavorite || visibilityModalImagine || visibilityAbout || visibilityBackup) &&(
             <View style={styles.containerSecundare}>
-                <Text style={styles.titluSecundare}>{visibilityFavorite ? 'Favorites' : 'Image'}</Text>
+                <Text style={styles.titluSecundare}>
+                    {   visibilityFavorite ? 'Favorites' : 
+                        visibilityModalImagine ? 'Image' : 
+                        visibilityAbout ? 'About' : 
+                        visibilityBackup ? 'Backup' : ''
+                    }
+                </Text>
             </View>
             )}
         </View>
