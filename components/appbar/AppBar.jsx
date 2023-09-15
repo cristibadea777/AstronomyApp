@@ -11,6 +11,8 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
                     visibilityModalImagine, setVisibilityModalImagine, 
                     setVisibilityModalMeniu, visibilityAPOD, visibilityFavorite, 
                     listaFavorite, setListaFavorite, favorita, setFavorita,
+                    vizualizareFavorit, setVizualizareFavorit, setVisibilityFavorite, 
+                    setVisibilityAPOD, dataAPOD,
                 }) => {
 
     const styles            = generareStiluriAppBar()
@@ -36,35 +38,48 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
         setVisibilityModalImagine(false)
     }
 
+    const handleOnPressButonInapoiFavorite = () => {
+        setVizualizareFavorit(false)
+        setVisibilityAPOD(false)
+        setVisibilityFavorite(true)
+    }
+
     return(
         <View style={styles.containerPrincipal}>
             <View style={styles.containerMeniu}>
-                {! visibilityModalImagine ? 
+                {(! visibilityModalImagine && ! vizualizareFavorit) ? 
                 (
-                <TouchableOpacity
-                    onPress={handleOnPressButonMeniu}
-                >
+                <TouchableOpacity onPress={handleOnPressButonMeniu}>
                     <FontAwesomeIcon icon={faBars} color="white" size={33}/>
-                </TouchableOpacity> ) : 
+                </TouchableOpacity> 
+                ) : vizualizareFavorit ? (
+                <TouchableOpacity onPress={handleOnPressButonInapoiFavorite}>
+                    <FontAwesomeIcon icon={faArrowLeft} color="white" size={33}/>
+                </TouchableOpacity>
+                ) :
                 (
-                <TouchableOpacity
-                    onPress={handleOnPressButonInapoi}
-                >
+                <TouchableOpacity onPress={handleOnPressButonInapoi}>
                     <FontAwesomeIcon icon={faArrowLeft} color="white" size={33}/>
                 </TouchableOpacity>
                 )
                 }
-
             </View>
 
             {visibilityAPOD &&(
             <>
+            {!vizualizareFavorit ?(
             <DayPicker 
                 styles                  =   {stylesDayPicker}
                 dataAleasa              =   {dataAleasa}
                 setDataAleasa           =   {setDataAleasa}
                 visibilityModalImagine  =   {visibilityModalImagine}
             /> 
+            ):(
+                <View style={styles.containerSecundare}>
+                    <Text style={styles.titluSecundare}>{dataAPOD.toString()}</Text>
+                </View>
+            )}
+
             <View style={styles.containerFavorite}>
                 <TouchableOpacity onPress={handlePressButonFavorita}>
                     <FontAwesomeIcon icon={faHeart} color={favorita ? "red" : "white"} size={33}/>

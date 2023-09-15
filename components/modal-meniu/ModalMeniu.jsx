@@ -3,13 +3,19 @@ import { generareStiluriModalMeniu } from "./Styles"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faBars, faFileArchive, faHeart, faInfo, faPhotoFilm } from "@fortawesome/free-solid-svg-icons"
 
-const ModalMeniu = ({visibilityModalMeniu, setVisibilityModalMeniu, setVisibilityAPOD, setVisibilityFavorite}) => {
+const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibilityAPOD, setVisibilityFavorite, 
+                      tempTitlu, tempExplicatie, tempUrl, setTitlu, setExplicatie, setURL}) => {
 
     const handleCloseModalMeniu = () => {
         setVisibilityModalMeniu(false)
     }
 
     const handleOnPressAPOD = () => {
+        //resetare valori originale APOD = ultimul APOD vizualizat inainte de accesarea unui APOD din sectiunea favorite
+        //ca sa nu se mai faca alt api call cu data aleasa
+        setTitlu     (tempTitlu)
+        setExplicatie(tempExplicatie)
+        setURL       (tempUrl)
         setVisibilityAPOD(true)
         //inchide restu
         setVisibilityFavorite(false)

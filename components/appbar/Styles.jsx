@@ -34,7 +34,7 @@ const generareStiluriAppBar = () => {
         titluSecundare: {
             color: "white", 
             fontSize: 24
-        }
+        },
 
 
     }

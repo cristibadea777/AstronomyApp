@@ -16,7 +16,6 @@ export default function App() {
   
   //to do
   //unele nu au poze, au linkuri de ytb - exemplu 6 septembrie - de pus video in container (daca url incepe cu https://youtube...)
-  //galerie 
   //in galerie cand se selcteaza un apod (apodu sa fie pus intr-un modal) pt vizualizare, data sa fie blocata 
     //(sa fie doar de afisaj nu sa se pota selecta alta), si in loc de barele de meniu sa apara o sageata inapoi 
     //- buton favorita sa fie si el vizibil - se da si listaFavorite ca arg
@@ -27,10 +26,16 @@ export default function App() {
   const [url,                     setURL]                     = useState('')
   const [explicatie,              setExplicatie]              = useState('')
   const [titlu,                   setTitlu]                   = useState('')
+  const [tempUrl,                 setTempURL]                 = useState('')
+  const [tempExplicatie,          setTempExplicatie]          = useState('')
+  const [tempTitlu,               setTempTitlu]               = useState('')
   const [visibilityModalImagine,  setVisibilityModalImagine]  = useState(false)
   const [visibilityModalMeniu,    setVisibilityModalMeniu]    = useState(false)
   const [listaFavorite,           setListaFavorite]           = useState([])
   const [favorita,                setFavorita]                = useState(false)
+  const [vizualizareFavorit,      setVizualizareFavorit]      = useState(false)
+  const [dataAPOD,                setDataAPOD]                = useState('')
+
   const apiKey = cheieApi
   
   const populareListaFavorite = async () => {
@@ -51,9 +56,12 @@ export default function App() {
     try {
       apeleazaApi(formatDate(dataAleasa)).then(
         raspunsAPI => {
-          setURL        (raspunsAPI.url)
-          setTitlu      (raspunsAPI.title)
-          setExplicatie (raspunsAPI.explanation)
+          setURL            (raspunsAPI.url)
+          setTitlu          (raspunsAPI.title)
+          setExplicatie     (raspunsAPI.explanation)
+          setTempURL        (raspunsAPI.url)
+          setTempTitlu      (raspunsAPI.title)
+          setTempExplicatie (raspunsAPI.explanation)
         }
       ).catch( error => {console.log(error)} )
     } 
@@ -95,6 +103,11 @@ export default function App() {
         setListaFavorite            = {setListaFavorite}
         favorita                    = {favorita}
         setFavorita                 = {setFavorita}
+        vizualizareFavorit          = {vizualizareFavorit}
+        setVizualizareFavorit       = {setVizualizareFavorit}
+        setVisibilityAPOD           = {setVisibilityAPOD}
+        setVisibilityFavorite       = {setVisibilityFavorite}
+        dataAPOD                    = {dataAPOD}
       />
       
       {visibilityAPOD && (
@@ -108,6 +121,14 @@ export default function App() {
       {visibilityFavorite && (
       <FavoriteAPODS 
         listaFavorite               = {listaFavorite}
+        setTitlu                    = {setTitlu}
+        setExplicatie               = {setExplicatie}
+        setDataAleasa               = {setDataAleasa}
+        setURL                      = {setURL}
+        setVisibilityFavorite       = {setVisibilityFavorite}
+        setVisibilityAPOD           = {setVisibilityAPOD}
+        setVizualizareFavorit       = {setVizualizareFavorit}
+        setDataAPOD                 = {setDataAPOD}
       />)}
 
       {visibilityModalImagine && (
@@ -124,6 +145,12 @@ export default function App() {
         setVisibilityModalMeniu = {setVisibilityModalMeniu}
         setVisibilityAPOD       = {setVisibilityAPOD}
         setVisibilityFavorite   = {setVisibilityFavorite}
+        tempTitlu               = {tempTitlu}
+        tempExplicatie          = {tempExplicatie}
+        tempUrl                 = {tempUrl}
+        setTitlu                = {setTitlu}
+        setExplicatie           = {setExplicatie}
+        setURL                  = {setURL}
       />
       )}
 

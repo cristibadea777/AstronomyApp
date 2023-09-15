@@ -1,19 +1,24 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { generareStiluriFavoriteAPODS } from "./Styles"
 
-const FavoriteAPODS = ({listaFavorite}) => {
+const FavoriteAPODS = ({listaFavorite, setTitlu, setExplicatie, setURL, setVisibilityFavorite, setVisibilityAPOD, setVizualizareFavorit, setDataAPOD}) => {
 
     const styles = generareStiluriFavoriteAPODS()  
 
-    const handleOnPressElementFavorit = (data) => {
-        //valorile le seteaza din baza de date - pt APOD-ul cu data de ... (nu se apeleaza api)
-        //afiseaza sectiune APOD 
+    const handleOnPressElementFavorit = (item) => {
+        setTitlu        (item.titlu)
+        setExplicatie   (item.explicatie)
+        setURL          (item.url)
+        setDataAPOD     (item.data)
+        setVizualizareFavorit(true)
+        setVisibilityFavorite(false)
+        setVisibilityAPOD    (true)
     }
 
     const randareListaFavorite = () => {
         return(
             listaFavorite.map((item, index) => (
-                <TouchableOpacity key={index} style={styles.elementFavorit} onPress={handleOnPressElementFavorit(item.data.toString())}>
+                <TouchableOpacity key={index} style={styles.elementFavorit} onPress={()=>{handleOnPressElementFavorit(item)}}>
                     <View style={styles.containerImagine}>            
                         <Image source={{ uri: item.url }} style={{ flex: 1 }} resizeMode='contain'/>
                     </View>
