@@ -13,7 +13,7 @@ import { findIndexFavorita } from './components/favorite/Favorite';
 export default function App() {
 
   //#232B2B #1e1e1e #11574a
-
+  
   //to do
   //unele nu au poze, au linkuri de ytb - exemplu 6 septembrie - de pus video in container (daca url incepe cu https://youtube...)
   //galerie 
@@ -21,23 +21,18 @@ export default function App() {
     //(sa fie doar de afisaj nu sa se pota selecta alta), si in loc de barele de meniu sa apara o sageata inapoi 
     //- buton favorita sa fie si el vizibil - se da si listaFavorite ca arg
 
-  const [visibilityAPOD,      setVisibilityAPOD]      = useState(true)
-  const [visibilityFavorite, setVisibilityFavorite] = useState(false)
-
-  const [dataAleasa,      setDataAleasa]      = useState(new Date())
-  const [url,             setURL]             = useState('')
-  const [explicatie,      setExplicatie]      = useState('')
-  const [titlu,           setTitlu]           = useState('')
-  
+  const [visibilityAPOD,          setVisibilityAPOD]          = useState(true)
+  const [visibilityFavorite,      setVisibilityFavorite]      = useState(false)
+  const [dataAleasa,              setDataAleasa]              = useState(new Date())
+  const [url,                     setURL]                     = useState('')
+  const [explicatie,              setExplicatie]              = useState('')
+  const [titlu,                   setTitlu]                   = useState('')
   const [visibilityModalImagine,  setVisibilityModalImagine]  = useState(false)
   const [visibilityModalMeniu,    setVisibilityModalMeniu]    = useState(false)
-
-  const [listaFavorite, setListaFavorite] = useState([])
-
-  const [favorita, setFavorita] = useState(false)
-
+  const [listaFavorite,           setListaFavorite]           = useState([])
+  const [favorita,                setFavorita]                = useState(false)
   const apiKey = cheieApi
-
+  
   const populareListaFavorite = async () => {
     getFavoriteAPODS()
     .then( lista => { setListaFavorite(lista) } )
@@ -112,11 +107,12 @@ export default function App() {
 
       {visibilityFavorite && (
       <FavoriteAPODS 
+        listaFavorite               = {listaFavorite}
       />)}
 
       {visibilityModalImagine && (
       <ModalImagine 
-        visibilityModalImagine      = {visibilityModalImagine}
+        visibilityModalImagine      = {visibilityModalImagine}  
         setVisibilityModalImagine   = {setVisibilityModalImagine}
         dataAleasa                  = {dataAleasa}
         url                         = {url}
