@@ -1,20 +1,26 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { generareStiluriAPOD } from "./Styles"
+import { WebView } from 'react-native-webview';
 
-const APOD = ({url, titlu, explicatie, setVisibilityModalImagine}) => {
+const APOD = ({url, titlu, explicatie, esteVideo, setVisibilityModalImagine}) => {
 
     const styles = generareStiluriAPOD()    
 
     return(
         <View style={styles.containerPrincipal}>
             <View style={styles.containerPoza}>
-                {url && (
-                    <TouchableOpacity 
-                        style={{flexGrow: 1}}
-                        onPress={() => {setVisibilityModalImagine(true)} }
-                    >
-                        <Image source={{ uri: url }} style={{ flex: 1 }} resizeMode='contain'/>
-                    </TouchableOpacity>
+                {(url && !esteVideo) && (
+                <TouchableOpacity style={{flexGrow: 1}} onPress={() => {setVisibilityModalImagine(true)} }>
+                    <Image source={{ uri: url }} style={{ flex: 1 }} resizeMode='contain'/>
+                </TouchableOpacity>
+                )}
+                {(url && esteVideo) && (
+                <View style={{flexGrow: 1}}>
+                    <WebView
+                        style={{ flex: 1 }}
+                        source={{ uri: url }}
+                    />
+                </View>
                 )}
             </View>
             
