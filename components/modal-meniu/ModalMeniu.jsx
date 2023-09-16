@@ -2,8 +2,10 @@ import { Modal, Text, TouchableOpacity, View } from "react-native"
 import { generareStiluriModalMeniu } from "./Styles"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faBars, faFileArchive, faHeart, faInfo, faPhotoFilm } from "@fortawesome/free-solid-svg-icons"
+import { findIndexFavorita } from "../favorite/Favorite"
+import { formatDate } from "../apod/ApelareAPI"
 
-const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibilityAPOD, setVisibilityFavorite, tempFavorita, setFavorita,
+const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibilityAPOD, setVisibilityFavorite, setFavorita, dataAleasa, listaFavorite,
                       tempTitlu, tempExplicatie, tempUrl, setTitlu, setExplicatie, setURL, setVisibilityAbout, setVisibilityBackup}) => {
 
     const handleCloseModalMeniu = () => {
@@ -16,7 +18,7 @@ const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibili
         setTitlu     (tempTitlu)
         setExplicatie(tempExplicatie)
         setURL       (tempUrl)
-        setFavorita  (tempFavorita)
+        setFavorita  (findIndexFavorita(listaFavorite, dataAleasa) !== -1)
         setVisibilityAPOD(true)
         //inchide restu
         setVisibilityFavorite(false)

@@ -42,14 +42,15 @@ const getFavoriteAPODS = async () => {
 
 
 const addAPODtoFavorites = ({titlu, explicatie, data, url}) => {
+    const dataFormatata = formatDate(data)
     db.transaction(
         tx => {
             tx.executeSql(
                 'INSERT INTO FavoriteAPODS (titlu, explicatie, data, url) VALUES (?, ?, ?, ?)',
-                [titlu, explicatie, formatDate(data), url],
+                [titlu, explicatie, dataFormatata, url],
                 (txObj, resultSet) => {
                     const id = resultSet.insertId
-                    console.log('APOD of date ' + data + ' added to favorites')
+                    console.log('APOD of date ' + dataFormatata + ' added to favorites')
                 },
                 error => {
                     console.log('Error inserting APOD:\n' + JSON.stringify(error))

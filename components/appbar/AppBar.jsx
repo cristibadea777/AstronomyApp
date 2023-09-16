@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faArrowLeft, faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
 import { addElementListaFavorite, removeElementListaFavorite } from "../favorite/Favorite"
 import { addAPODtoFavorites, deleteAPODfromFavorites } from "../BazaDeDate"
-import { formatDate } from "../apod/ApelareAPI"
 
 const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
                     visibilityModalImagine, setVisibilityModalImagine, 

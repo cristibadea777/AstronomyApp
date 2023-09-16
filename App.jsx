@@ -30,7 +30,6 @@ export default function App() {
   const [tempUrl,                 setTempURL]                 = useState('')
   const [tempExplicatie,          setTempExplicatie]          = useState('')
   const [tempTitlu,               setTempTitlu]               = useState('')
-  const [tempFavorita,            setTempFavorita]            = useState('')
   const [visibilityModalImagine,  setVisibilityModalImagine]  = useState(false)
   const [visibilityModalMeniu,    setVisibilityModalMeniu]    = useState(false)
   const [listaFavorite,           setListaFavorite]           = useState([])
@@ -61,6 +60,7 @@ export default function App() {
           setURL            (raspunsAPI.url)
           setTitlu          (raspunsAPI.title)
           setExplicatie     (raspunsAPI.explanation)
+
           setTempURL        (raspunsAPI.url)
           setTempTitlu      (raspunsAPI.title)
           setTempExplicatie (raspunsAPI.explanation)
@@ -73,21 +73,18 @@ export default function App() {
     }
   }
 
-  const setareFavorita = (data) => {
-    if(findIndexFavorita(listaFavorite, data) === -1)
-      setFavorita(false)
-    else
-      setFavorita(true)
-  }
-
   useEffect(
     () => { 
-      //setare favorita
-      setareFavorita(dataAleasa)
       //la startup dataAleasa se alege automat (data de azi)
-      //aici se seteaza titlu, explicatie, url
       preiaDateAPOD()
+      setFavorita       (findIndexFavorita(listaFavorite, dataAleasa) !== -1)
     }, [dataAleasa]
+  )
+
+  useEffect(
+    () => {
+      setFavorita       (findIndexFavorita(listaFavorite, dataAleasa) !== -1)
+    }, [listaFavorite]
   )
 
   return (
@@ -137,7 +134,7 @@ export default function App() {
         setVisibilityAPOD           = {setVisibilityAPOD}
         setVizualizareFavorit       = {setVizualizareFavorit}
         setDataAPOD                 = {setDataAPOD}
-        setareFavorita              = {setareFavorita}
+        setFavorita                 = {setFavorita}
       />)}
 
       {visibilityModalImagine && (
@@ -157,11 +154,12 @@ export default function App() {
         tempTitlu               = {tempTitlu}
         tempExplicatie          = {tempExplicatie}
         tempUrl                 = {tempUrl}
-        tempFavorita            = {tempFavorita}
         setTitlu                = {setTitlu}
         setExplicatie           = {setExplicatie}
         setURL                  = {setURL}
         setFavorita             = {setFavorita}
+        dataAleasa              = {dataAleasa}
+        listaFavorite           = {listaFavorite}
         setVisibilityAbout      = {setVisibilityAbout}
         setVisibilityBackup     = {setVisibilityBackup}
       />
