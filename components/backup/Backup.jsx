@@ -20,10 +20,10 @@ const Backup = ({preiaDateAPOD, populareListaFavorite}) => {
         //import baza de date
         try {
             result = await DocumentPicker.getDocumentAsync({ copyToCacheDirectory: false  });
-            console.log(result);
+            console.log("Document picker result: " + JSON.stringify(result));
             if (result.type !== 'cancel') {
               await FileSystem.copyAsync({
-                from: result.uri, 
+                from: result.assets[0].uri, 
                 to:   `${FileSystem.documentDirectory}SQLite/FavoriteAPODS.db`,
               })
               await inchidereBd()

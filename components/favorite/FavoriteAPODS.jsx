@@ -1,7 +1,7 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import { generareStiluriFavoriteAPODS } from "./Styles"
 
-const FavoriteAPODS = ({listaFavorite, setTitlu, setExplicatie, setURL, setVisibilityFavorite, setVisibilityAPOD, setVizualizareFavorit, setDataAPOD}) => {
+const FavoriteAPODS = ({listaFavorite, setTitlu, setExplicatie, setURL, setVisibilityFavorite, setVisibilityAPOD, setVizualizareFavorit, setDataAPOD, setareFavorita}) => {
 
     const styles = generareStiluriFavoriteAPODS()  
 
@@ -10,6 +10,7 @@ const FavoriteAPODS = ({listaFavorite, setTitlu, setExplicatie, setURL, setVisib
         setExplicatie   (item.explicatie)
         setURL          (item.url)
         setDataAPOD     (item.data)
+        setareFavorita  (item.data)
         setVizualizareFavorit(true)
         setVisibilityFavorite(false)
         setVisibilityAPOD    (true)

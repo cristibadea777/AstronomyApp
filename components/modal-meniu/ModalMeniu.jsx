@@ -3,7 +3,7 @@ import { generareStiluriModalMeniu } from "./Styles"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faBars, faFileArchive, faHeart, faInfo, faPhotoFilm } from "@fortawesome/free-solid-svg-icons"
 
-const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibilityAPOD, setVisibilityFavorite, 
+const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibilityAPOD, setVisibilityFavorite, tempFavorita, setFavorita,
                       tempTitlu, tempExplicatie, tempUrl, setTitlu, setExplicatie, setURL, setVisibilityAbout, setVisibilityBackup}) => {
 
     const handleCloseModalMeniu = () => {
@@ -16,6 +16,7 @@ const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibili
         setTitlu     (tempTitlu)
         setExplicatie(tempExplicatie)
         setURL       (tempUrl)
+        setFavorita  (tempFavorita)
         setVisibilityAPOD(true)
         //inchide restu
         setVisibilityFavorite(false)

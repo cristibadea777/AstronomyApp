@@ -30,6 +30,7 @@ export default function App() {
   const [tempUrl,                 setTempURL]                 = useState('')
   const [tempExplicatie,          setTempExplicatie]          = useState('')
   const [tempTitlu,               setTempTitlu]               = useState('')
+  const [tempFavorita,            setTempFavorita]            = useState('')
   const [visibilityModalImagine,  setVisibilityModalImagine]  = useState(false)
   const [visibilityModalMeniu,    setVisibilityModalMeniu]    = useState(false)
   const [listaFavorite,           setListaFavorite]           = useState([])
@@ -72,13 +73,17 @@ export default function App() {
     }
   }
 
+  const setareFavorita = (data) => {
+    if(findIndexFavorita(listaFavorite, data) === -1)
+      setFavorita(false)
+    else
+      setFavorita(true)
+  }
+
   useEffect(
     () => { 
       //setare favorita
-      if(findIndexFavorita(listaFavorite, dataAleasa) === -1)
-        setFavorita(false)
-      else
-        setFavorita(true)
+      setareFavorita(dataAleasa)
       //la startup dataAleasa se alege automat (data de azi)
       //aici se seteaza titlu, explicatie, url
       preiaDateAPOD()
@@ -132,6 +137,7 @@ export default function App() {
         setVisibilityAPOD           = {setVisibilityAPOD}
         setVizualizareFavorit       = {setVizualizareFavorit}
         setDataAPOD                 = {setDataAPOD}
+        setareFavorita              = {setareFavorita}
       />)}
 
       {visibilityModalImagine && (
@@ -151,9 +157,11 @@ export default function App() {
         tempTitlu               = {tempTitlu}
         tempExplicatie          = {tempExplicatie}
         tempUrl                 = {tempUrl}
+        tempFavorita            = {tempFavorita}
         setTitlu                = {setTitlu}
         setExplicatie           = {setExplicatie}
         setURL                  = {setURL}
+        setFavorita             = {setFavorita}
         setVisibilityAbout      = {setVisibilityAbout}
         setVisibilityBackup     = {setVisibilityBackup}
       />

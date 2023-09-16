@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faArrowLeft, faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
 import { addElementListaFavorite, removeElementListaFavorite } from "../favorite/Favorite"
 import { addAPODtoFavorites, deleteAPODfromFavorites } from "../BazaDeDate"
+import { formatDate } from "../apod/ApelareAPI"
 
 const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
                     visibilityModalImagine, setVisibilityModalImagine, 
@@ -19,14 +20,17 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
     const stylesDayPicker   = generareStiluriDayPicker()
     
     const handlePressButonFavorita = async () => {
+        //dataAleasa este data aleasa din date picker, dataAPOD e data APOD-ului curent de la favorite
+        let data = ''
+        data = vizualizareFavorit ? dataAPOD : dataAleasa 
         if(favorita){
             setFavorita(false)
-            setListaFavorite(removeElementListaFavorite(listaFavorite, dataAleasa))
-            await deleteAPODfromFavorites({dataAleasa})
+            setListaFavorite(removeElementListaFavorite(listaFavorite, data))
+            await deleteAPODfromFavorites({data})
         }else{
             setFavorita(true)
-            setListaFavorite(addElementListaFavorite(listaFavorite, titlu, explicatie, url, dataAleasa))
-            await addAPODtoFavorites({titlu, explicatie, dataAleasa, url})
+            setListaFavorite(addElementListaFavorite(listaFavorite, titlu, explicatie, url, data))
+            await addAPODtoFavorites({titlu, explicatie, data, url})
         }
     }
     

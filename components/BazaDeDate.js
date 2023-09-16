@@ -41,15 +41,15 @@ const getFavoriteAPODS = async () => {
 }
 
 
-const addAPODtoFavorites = ({titlu, explicatie, dataAleasa, url}) => {
+const addAPODtoFavorites = ({titlu, explicatie, data, url}) => {
     db.transaction(
         tx => {
             tx.executeSql(
                 'INSERT INTO FavoriteAPODS (titlu, explicatie, data, url) VALUES (?, ?, ?, ?)',
-                [titlu, explicatie, formatDate(dataAleasa), url],
+                [titlu, explicatie, formatDate(data), url],
                 (txObj, resultSet) => {
                     const id = resultSet.insertId
-                    console.log('INSERTED APOD - ID: ' + id)
+                    console.log('APOD of date ' + data + ' added to favorites')
                 },
                 error => {
                     console.log('Error inserting APOD:\n' + JSON.stringify(error))
@@ -59,14 +59,14 @@ const addAPODtoFavorites = ({titlu, explicatie, dataAleasa, url}) => {
     )
 }
 
-const deleteAPODfromFavorites = ({dataAleasa}) => {
+const deleteAPODfromFavorites = ({data}) => {
     db.transaction(
         tx => {
             tx.executeSql(
                 'DELETE FROM FavoriteAPODS WHERE data = ?',
-                [formatDate(dataAleasa)],
-                ()    => console.log("APOD of date " + formatDate(dataAleasa) + " removed from favorites"),
-                error => console.log("Error removing APOD of date " + formatDate(dataAleasa) + " from favorites:\n" + JSON.stringify(error))
+                [formatDate(data)],
+                ()    => console.log("APOD of date " + formatDate(data) + " removed from favorites"),
+                error => console.log("Error removing APOD of date " + formatDate(data) + " from favorites:\n" + JSON.stringify(error))
             )
         }
     )
