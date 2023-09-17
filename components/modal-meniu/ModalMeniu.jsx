@@ -49,6 +49,7 @@ const ModalMeniu = ({ visibilityModalMeniu, setVisibilityModalMeniu, setVisibili
         //inchide restu
         setVisibilityAPOD(false)
         setVisibilityFavorite(false)
+        setVisibilityBackup(false)
         handleCloseModalMeniu()
     }
 

@@ -12,7 +12,7 @@ const About = () => {
             </View>
 
             <View style={styles.containerDescriere}>
-                <Text style={styles.textDescriere}>Free app to visualize NASA's APOD. The API key is limited to 2000 calls per hour, so if the app doesn't work, it exceeded its limit. The API can be found on the official NASA website, where you can get a free API key too.</Text>
+                <Text style={styles.textDescriere}>Free app to visualize NASA's APOD. Functionalities to save your favorite APODs in the gallery, export and import your favorites. The API key is limited to 2000 calls per hour, so if the app doesn't work, it exceeded its limit. The API can be found on the official NASA website, where you can get a free API key too.</Text>
             </View>
         </View>
     )
