@@ -6,6 +6,7 @@ const generareStiluriDayPicker = () => {
     {
         containerDatePicker: {
             flex: 1,
+            flexDirection: "row",
             backgroundColor: "#232B2B"
         },
 
@@ -13,6 +14,12 @@ const generareStiluriDayPicker = () => {
             flex: 1, 
             alignItems: "center", 
             justifyContent: "center",
+        },
+
+        butonSageata: {
+          width: "25%",
+          alignItems: "center",
+          justifyContent: "center",
         },
 
         textData: {

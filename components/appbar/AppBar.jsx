@@ -3,9 +3,12 @@ import { generareStiluriAppBar } from "./Styles"
 import DayPicker from "./daypicker/DayPicker"
 import { generareStiluriDayPicker } from "./daypicker/Styles"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-import { faArrowLeft, faBars, faHeart } from "@fortawesome/free-solid-svg-icons"
+import { faArrowLeft, faBars, faHeart, faSave } from "@fortawesome/free-solid-svg-icons"
 import { addElementListaFavorite, removeElementListaFavorite } from "../favorite/Favorite"
 import { addAPODtoFavorites, deleteAPODfromFavorites } from "../BazaDeDate"
+import * as Sharing from 'expo-sharing';
+import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library';
 
 const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
                     visibilityModalImagine, setVisibilityModalImagine, 
@@ -47,6 +50,28 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
         setVisibilityFavorite(true)
     }
 
+
+    
+    const handlePressButonSaveImage = async () => {
+        try {
+            const nume = dataAleasa.toString()
+            const fileUri = `${FileSystem.documentDirectory}${dataAleasa}.jpg`
+            //const downloadedObjet = await FileSystem.downloadAsync(url, fileUri)
+            //const uri = downloadedObjet.uri
+            //destructureaza direct obiectul returnat de file system si ia proprietatea uri
+            const  { uri }  = await FileSystem.downloadAsync(url, fileUri) 
+
+            if(uri){
+                console.log("Image downloaded")
+                Sharing.shareAsync(uri)
+            }
+            else{ console.log("Failed to download image") }
+
+        } catch(error) { console.log("Error downloading image - " + error) }
+    }
+
+
+
     return(
         <View style={styles.containerPrincipal}>
             <View style={styles.containerMeniu}>
@@ -75,7 +100,6 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
                 styles                  =   {stylesDayPicker}
                 dataAleasa              =   {dataAleasa}
                 setDataAleasa           =   {setDataAleasa}
-                visibilityModalImagine  =   {visibilityModalImagine}
             /> 
             ):(
                 <View style={styles.containerSecundare}>
@@ -91,17 +115,27 @@ const AppBar = ({   dataAleasa, setDataAleasa, titlu, url, explicatie,
             </>
             )}
 
-            {(visibilityFavorite || visibilityModalImagine || visibilityAbout || visibilityBackup) &&(
+            {(visibilityFavorite ||  visibilityAbout || visibilityBackup) &&(
             <View style={styles.containerSecundare}>
                 <Text style={styles.titluSecundare}>
                     {   visibilityFavorite ? 'Favorites' : 
-                        visibilityModalImagine ? 'Image' : 
                         visibilityAbout ? 'About' : 
                         visibilityBackup ? 'Backup' : ''
                     }
                 </Text>
             </View>
             )}
+
+            {visibilityModalImagine && (
+            <View style={styles.containerSecundare}>
+                <Text style={styles.titluSecundare}>Image</Text>
+                <TouchableOpacity style={styles.butonSaveImagine} onPress={handlePressButonSaveImage}>
+                    <FontAwesomeIcon icon={faSave} color={"white"} size={33}/>
+                </TouchableOpacity>
+            </View>
+            )}
+
+
         </View>
     )
 }

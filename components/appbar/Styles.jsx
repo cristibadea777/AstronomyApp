@@ -26,6 +26,7 @@ const generareStiluriAppBar = () => {
 
         containerSecundare: {
           flex: 1, 
+          flexDirection: "row",
           backgroundColor: "#232B2B",
           justifyContent: "center",
           alignItems: "center",
@@ -35,6 +36,13 @@ const generareStiluriAppBar = () => {
             color: "white", 
             fontSize: 24
         },
+
+        butonSaveImagine: {
+          width: "60%",
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "center",
+        }
 
 
     }

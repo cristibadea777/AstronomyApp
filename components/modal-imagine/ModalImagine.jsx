@@ -19,6 +19,7 @@ const ModalImagine = ( {visibilityModalImagine, setVisibilityModalImagine, dataA
                 dataAleasa                = {dataAleasa}
                 visibilityModalImagine    = {visibilityModalImagine}
                 setVisibilityModalImagine = {setVisibilityModalImagine}
+                url                       = {url}
             />
             
             {url && (
